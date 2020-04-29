@@ -2,13 +2,20 @@ const mongoose = require('mongoose');
 
 const expenseSchema = mongoose.Schema({
     name: {
-        type: String
+        type: String,
+        required: true
     },
     amount: {
-        type: Number
+        type: Number,
+        required: true
     },
     category: {
-        type: String
+        type: String,
+        required: true
+    },
+    active: {
+        type: Boolean,
+        default: true
     },
     date: {
         type: Date,

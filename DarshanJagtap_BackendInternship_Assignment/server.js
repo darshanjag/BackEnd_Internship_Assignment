@@ -1,10 +1,18 @@
 const express = require('express');
-
+const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const expenseRouter = require('./routers/expenseRouter');
 
 const app = express();
+
+//body parser middleware
+app.use(bodyParser.urlencoded({
+  extended: false
+}))
+
+// parse application/json
+app.use(bodyParser.json())
 
 dotenv.config({
   path: './config.env',
