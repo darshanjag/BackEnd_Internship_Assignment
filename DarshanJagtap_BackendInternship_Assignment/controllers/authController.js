@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const { promisify } = require('util');
 const User = require('./../models/userModel');
 const AppError = require('./../utils/AppError');
 
@@ -6,9 +7,7 @@ const AppError = require('./../utils/AppError');
 const signToken = id => {
     return jwt.sign({
         id
-    }, process.env.JWT_SECRET, {
-        expiresIn: process.env.JWT_EXPIRES_IN,
-    })
+    }, process.env.JWT_SECRET)
 }
 
 exports.signup = async (req, res, next) => {
@@ -66,3 +65,36 @@ exports.login = async (req, res, next) => {
         console.log(err);
     }
 };
+
+exports.protect = async (req, res, next) => {
+    //  Getting token and checking if it exists
+    let token;
+    if (
+        req.headers.authorization &&
+        req.headers.authorization.startsWith('Bearer')
+    ) {
+        token = req.headers.authorization.split(' ')[1];
+    } else if (req.cookies.jwt) {
+        token = req.cookies.jwt;
+    }
+    if (!token) {
+        return next(new AppError('you are not logged in, please login to get access'));
+    }
+    //  valildate token
+    let decoded;
+
+    try{
+     decoded= await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+    }catch(err){
+        console.log(err);
+    }
+
+    //  check if the user still exists
+    const user = await User.findById(decoded.id);
+    if(!user){
+        return next(new AppError('user belonging to the token does not exist'));
+    }
+    //grant access to the protected route
+    req.user = user;
+    next();
+}
