@@ -20,9 +20,17 @@ const expenseSchema = mongoose.Schema({
     date: {
         type: Date,
         default: Date.now()
+    },
+    user:{
+       type: mongoose.Schema.ObjectId,
+       ref:'User'
     }
 
 
 });
+//add user id in the document. function called in expenseController
+expenseSchema.methods.addUsers = async function (id) {
+    this.user = id;
+}
 const Expense = mongoose.model('Expense', expenseSchema);
 module.exports = Expense;
