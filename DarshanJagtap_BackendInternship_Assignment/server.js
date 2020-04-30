@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const expenseRouter = require('./routers/expenseRouter');
+const userRouter = require('./routers/userRouter');
 
 const app = express();
 
@@ -39,6 +40,7 @@ const port = process.env.PORT || 3000;
 // dotenv
 
 app.use('/expense/api', expenseRouter);
+app.use('/expense/api/users', userRouter);
 
 app.listen(port, () => {
   console.log(`server started on port ${port}`);
