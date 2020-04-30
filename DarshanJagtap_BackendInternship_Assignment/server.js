@@ -42,6 +42,16 @@ const port = process.env.PORT || 3000;
 app.use('/expense/api', expenseRouter);
 app.use('/expense/api/users', userRouter);
 
+app.use((err, req, res, next) => {
+  err.statusCode = err.statusCode || 500;
+  err.status = err.status || 'error';
+  res.status(err.statusCode).json({
+    status: err.status,
+    msg: err.message
+  })
+
+})
+
 app.listen(port, () => {
   console.log(`server started on port ${port}`);
 });
