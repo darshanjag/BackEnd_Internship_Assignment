@@ -5,7 +5,6 @@ const bcrypt = require('bcryptjs');
 const userSchema = mongoose.Schema({
     name: {
         type: String,
-        required: true,
     },
     email: {
         type: String,
@@ -43,6 +42,11 @@ const userSchema = mongoose.Schema({
 
 userSchema.virtual('expenses', {
     ref: 'Expense',
+    foreignField: 'user',
+    localField: '_id'
+  });
+userSchema.virtual('budget', {
+    ref: 'Budget',
     foreignField: 'user',
     localField: '_id'
   });
