@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const expenseRouter = require('./routers/expenseRouter');
 const userRouter = require('./routers/userRouter');
+const budgetRouter = require('./routers/budgetRouter')
 
 const app = express();
 
@@ -41,6 +42,7 @@ const port = process.env.PORT || 3000;
 
 app.use('/expense/api', expenseRouter);
 app.use('/expense/api/users', userRouter);
+app.use('/expense/api/budget',budgetRouter);
 
 app.use((err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
