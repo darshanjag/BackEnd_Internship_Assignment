@@ -1,35 +1,66 @@
-const updateBudget= async(name,amount,category)=>{
+
+const updateBudgetFunction= async(e)=>{
+    const budget = document.getElementById('budget-input').value;
+    console.log(budget)
+  
     try{
-    const res = await axios({
-       method: 'POST',
-       url: 'http://localhost:3000/expense/api/',
-       data: {
-         name,
-         amount,
-         category
-       }
-      
-   })
-
-   console.log(res);
-}catch(err){
-    console.log(err.response.data);
-}
-}
-document.querySelector('#addcategoryform').addEventListener('submit', e=>{
-    e.preventDefault();
- 
-   
-})
-
-
-$("#expense-submit").click(function(){
-    const name = document.getElementById('expense-name-input').value;
-    const amount = document.getElementById('expense-amount-input').value;
-    const category = document.getElementById('expense-category-input').value;
-    if(category===''){
-        category ===undefined;
+        const res = await axios({
+           method: 'PATCH',
+           url: `http://localhost:3000/expense/api/budget/${e.value}`,
+           data: {
+               budget
+           }
+        })
+        location.reload();
+       console.log(res);
+     
+    }catch(err){
+        console.log(err.response.data);
     }
-    submitExpense(name,amount,category)
-    setTimeout(function(){ location.reload(true); }, 1000);
-  });
+    
+}
+
+const addCategoryFunction= async(e)=>{
+    
+   
+
+
+    try{
+        const category = document.getElementById('add-category-input').value;
+        console.log(category)
+        const res = await axios({
+           method: 'POST',
+           url: 'http://localhost:3000/expense/api/category/',
+           data: {
+               name:category
+           }
+        })
+        location.reload();
+       console.log(res);
+     
+    }catch(err){
+        console.log(err.response.data);
+    }
+    
+}
+const deleteCategory= async(e)=>{
+    
+   
+
+
+    try{
+        const id = document.getElementById('category-delete-btn').value;
+        console.log(id)
+        const res = await axios({
+           method: 'DELETE',
+           url: `http://localhost:3000/expense/api/category/${id}`,
+          
+        })
+        location.reload();
+       console.log(res);
+     
+    }catch(err){
+        console.log(err.response.data);
+    }
+    
+}

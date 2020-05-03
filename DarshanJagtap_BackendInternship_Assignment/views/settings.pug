@@ -10,28 +10,28 @@ block content
                     a.list-group-item.list-group-item-action(href='/settings') Settings
                     a.list-group-item.list-group-item-action(href='#') Profile
             #main-area.col-md-9
-                form
+                form#budget-update-form
                     .form-group
                         label(for='budget-input') 
-                        input#budget-input.form-control(type='text', aria-describedby='emailHelp', value=`${budget}`)
-                    button.budget-submit(type='submit') Update Budget
+                        input#budget-input.form-control(type='text', aria-describedby='emailHelp', value=`${b[0].budget}`)
+                    button#budget-update.btn.btn-primary(type='button' value=`${b[0]._id}` onclick='updateBudgetFunction(this)') Update Budget
 
                 form
                     .form-group
                         label(for='add-category-input') 
                         input#add-category-input.form-control(type='text', aria-describedby='emailHelp', placeholder='add category')
-                    button.btn.btn-primary(type='submit') Add Category  
+                    button.btn.btn-primary(type='button' onclick="addCategoryFunction(this)") Add Category  
                 
 
                 h3 categories
                 table.table
                         
                     tbody
-
-                        tr#expense-row
-                            each category in user.categories
-                                td= `${category.name}`
-                                td 
-                                    button#expense-delete.btn.btn-danger(type='button' onclick="SomeDeleteRowFunction(this)"  value=``) Delete
+                        each category in categories
+                            tr#expense-row
+                            
+                                    td= `${category.name}`
+                                    td 
+                                        button#category-delete-btn.btn.btn-danger(type='button' onclick="deleteCategory(this)"  value=`${category._id}`) Delete
 
                 

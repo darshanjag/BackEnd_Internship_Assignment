@@ -1,4 +1,22 @@
 
+// eslint-disable-next-line no-new
+new Chart(document.getElementById("pie-chart"), {
+    type: 'pie',
+    data: {
+      labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+      datasets: [{
+        label: "Population (millions)",
+        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+        data: [2478,5267,734,784,433]
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Predicted world population (millions) in 2050'
+      }
+    }
+});
 const SomeDeleteRowFunction= async(e)=>{
     try{
         const res = await axios({
@@ -32,11 +50,7 @@ const submitExpense= async(name,amount,category)=>{
     console.log(err.response.data);
 }
 }
-document.querySelector('#addcategoryform').addEventListener('submit', e=>{
-    e.preventDefault();
- 
-   
-})
+
 
 $("#expense-submit").click(function(){
     const name = document.getElementById('expense-name-input').value;
@@ -49,3 +63,4 @@ $("#expense-submit").click(function(){
     setTimeout(function(){ location.reload(true); }, 1000);
   });
    
+

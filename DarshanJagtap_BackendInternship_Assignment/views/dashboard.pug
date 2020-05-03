@@ -20,6 +20,7 @@ block content
                         #category-chart.card-header
                             | Category division
                         .card-body
+                            canvas#pie-chart(width='800' height='450')
                             #categories
                 table.table
                     thead
@@ -61,6 +62,8 @@ block content
                                 option(value='') select
                                 option(value='grocery') grocery
                                 option(value='electronics') electronics
+                                each category in user.categories
+                                    option(value=`${category.name}`)= `${category.name}`
                             button#expense-submit.btn.btn-primary(type='submit') Submit
 
               

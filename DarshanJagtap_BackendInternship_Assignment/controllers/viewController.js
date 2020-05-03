@@ -26,9 +26,12 @@ exports.dashboard =( async(req,res)=>{
       const user = req.user;
       const b = req.user.budget
      const budget=(b[0].budget)
+     const categories = req.user.categories;
+    
       res.status(200).render('settings',{
         user,
-        budget
+        b,
+        categories
       });
 
     }catch(err){

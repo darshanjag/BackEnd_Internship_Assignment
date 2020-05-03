@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const categorySchema = mongoose.Schema({
     name:{
         type: String,
-        required: [true, 'a category must have a name']
+        required:[true, 'a category must need a name']
     },
     user:{
         type: mongoose.Schema.ObjectId,

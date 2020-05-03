@@ -6,5 +6,7 @@ const router = express.Router()
 
 router.route('/').post(authController.protect, categoryController.addCategory);
 
+router.route('/:id').delete(authController.protect, categoryController.deleteCategory)
+
 module.exports = router;
 
