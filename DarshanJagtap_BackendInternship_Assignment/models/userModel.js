@@ -50,6 +50,11 @@ userSchema.virtual('budget', {
     foreignField: 'user',
     localField: '_id'
   });
+userSchema.virtual('categories', {
+    ref: 'Category',
+    foreignField: 'user',
+    localField: '_id'
+  });
 userSchema.pre('save', async function (next) {
     if (!this.isModified('password')) return next();
     this.password = await bcrypt.hash(this.password, 12);

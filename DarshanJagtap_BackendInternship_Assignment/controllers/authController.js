@@ -89,7 +89,7 @@ exports.protect = async (req, res, next) => {
     }
 
     //  check if the user still exists
-    const user = await User.findById(decoded.id).populate('expenses budget');
+    const user = await User.findById(decoded.id).populate('expenses budget categories');
 
     if(!user){
         return next(new AppError('user belonging to the token does not exist'));

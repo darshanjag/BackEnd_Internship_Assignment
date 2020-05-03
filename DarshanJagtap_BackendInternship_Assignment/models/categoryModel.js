@@ -4,6 +4,11 @@ const categorySchema = mongoose.Schema({
     name:{
         type: String,
         required: [true, 'a category must have a name']
+    },
+    user:{
+        type: mongoose.Schema.ObjectId,
+        required:[true,'a category must have a user'],
+        ref: 'User'
     }
 })
 
