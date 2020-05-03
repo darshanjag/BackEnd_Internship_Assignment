@@ -9,5 +9,6 @@ router.route('/dashboard').get(authController.protect,viewController.dashboard);
 
 router.route('/').get(viewController.login);
 
+router.route('/settings').get(authController.protect,viewController.settings);
 
 module.exports = router;

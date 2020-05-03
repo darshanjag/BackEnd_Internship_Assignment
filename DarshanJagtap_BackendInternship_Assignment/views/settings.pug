@@ -1,0 +1,37 @@
+extends base
+
+block content
+    .container-fluid
+        .row
+            #sidebar.col-md-3
+                .list-group
+                    a.list-group-item.list-group-item-action.active(href='/dashboard')
+                        | Home
+                    a.list-group-item.list-group-item-action(href='/settings') Settings
+                    a.list-group-item.list-group-item-action(href='#') Profile
+            #main-area.col-md-9
+                form
+                    .form-group
+                        label(for='budget-input') 
+                        input#budget-input.form-control(type='text', aria-describedby='emailHelp', value=`${budget}`)
+                    button.budget-submit(type='submit') Update Budget
+
+                form
+                    .form-group
+                        label(for='add-category-input') 
+                        input#add-category-input.form-control(type='text', aria-describedby='emailHelp', placeholder='add category')
+                    button.btn.btn-primary(type='submit') Add Category  
+                
+
+                h3 categories
+                table.table
+                        
+                    tbody
+
+                        tr#expense-row
+                            each category in user.categories
+                                td= `${category.name}`
+                                td 
+                                    button#expense-delete.btn.btn-danger(type='button' onclick="SomeDeleteRowFunction(this)"  value=``) Delete
+
+                

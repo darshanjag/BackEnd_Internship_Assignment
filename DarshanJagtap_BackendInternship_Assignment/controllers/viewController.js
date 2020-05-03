@@ -13,10 +13,26 @@ exports.dashboard =( async(req,res)=>{
     res.status(200).render('dashboard',{
         user,
         expenses
-    });
+          });
   })
 
   exports.login =( async(req,res)=>{
     
     res.status(200).render('login');
+  })
+
+  exports.settings = (async(req,res)=>{
+    try{
+      const user = req.user;
+      const b = req.user.budget
+     const budget=(b[0].budget)
+      res.status(200).render('settings',{
+        user,
+        budget
+      });
+
+    }catch(err){
+      console.log(err)
+    }
+
   })

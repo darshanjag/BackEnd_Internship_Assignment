@@ -5,9 +5,9 @@ block content
         .row
             #sidebar.col-md-3
                 .list-group
-                    a.list-group-item.list-group-item-action.active(href='index.html')
+                    a.list-group-item.list-group-item-action.active(href='/dashboard')
                         | Home
-                    a.list-group-item.list-group-item-action(href='#') Settings
+                    a.list-group-item.list-group-item-action(href='/settings') Settings
                     a.list-group-item.list-group-item-action(href='#') Profile
             #main-area.col-md-9
                 .row.justify-content-around
@@ -32,7 +32,7 @@ block content
                                  button.btn.btn-primary(type='button' data-toggle='modal' data-target='#exampleModal') Add Expense
                     tbody
                         each expense in expenses
-                            tr
+                            tr#expense-row
                                 td= `${expense.category}`
                                 td= `${expense.name}`
                                 td= `${expense.amount}`
@@ -51,13 +51,13 @@ block content
                     form#addcategoryform
                         .form-group
                             label(for='expense-name') Name
-                            input#expense-name.form-control(type='email' aria-describedby='emailHelp' placeholder='Expense Name')
+                            input#expense-name-input.form-control(type='text'  aria-describedby='emailHelp' placeholder='Expense Name')
                             .form-group
                             label(for='expense-amount') amount
-                            input#expense-amount.form-control(type='text' placeholder='Expense Amount')
+                            input#expense-amount-input.form-control(type='text'  placeholder='Expense Amount')
                             .form-group
                             label(for='expense-category') Select Category
-                            select#expense-category.form-control
+                            select#expense-category-input.form-control
                                 option(value='') select
                                 option(value='grocery') grocery
                                 option(value='electronics') electronics

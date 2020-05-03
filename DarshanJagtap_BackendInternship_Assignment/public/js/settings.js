@@ -1,20 +1,4 @@
-
-const SomeDeleteRowFunction= async(e)=>{
-    try{
-        const res = await axios({
-           method: 'PATCH',
-           url: `http://localhost:3000/expense/api/${e.value}`
-        })
-    
-       console.log(res);
-       location.reload();
-    }catch(err){
-        console.log(err.response.data);
-    }
-    
-}
-
-const submitExpense= async(name,amount,category)=>{
+const updateBudget= async(name,amount,category)=>{
     try{
     const res = await axios({
        method: 'POST',
@@ -38,6 +22,7 @@ document.querySelector('#addcategoryform').addEventListener('submit', e=>{
    
 })
 
+
 $("#expense-submit").click(function(){
     const name = document.getElementById('expense-name-input').value;
     const amount = document.getElementById('expense-amount-input').value;
@@ -48,4 +33,3 @@ $("#expense-submit").click(function(){
     submitExpense(name,amount,category)
     setTimeout(function(){ location.reload(true); }, 1000);
   });
-   
