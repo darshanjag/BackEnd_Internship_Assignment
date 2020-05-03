@@ -10,6 +10,29 @@ const signToken = id => {
     }, process.env.JWT_SECRET)
 }
 
+const createSendToken = (user, statusCode, res) => {
+    const token = signToken(user._id);
+    const cookieOptions = {
+      expires: new Date(
+        Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
+      ),
+      httpOnly: true
+    };
+    if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
+  
+    res.cookie('jwt', token, cookieOptions);
+  
+    // Remove password from output
+    user.password = undefined;
+  
+    res.status(statusCode).json({
+      status: 'success',
+      token,
+      data: {
+        user
+      }
+    });
+  };
 exports.signup = async (req, res, next) => {
     //creating the user
     try {
@@ -57,10 +80,9 @@ exports.login = async (req, res, next) => {
         //logging the user
         const token = signToken(user._id);
 
-        res.status(201).json({
-            status: 'succecss',
-            token
-        });
+
+        
+        createSendToken(user, 200, res);
     } catch (err) {
         console.log(err);
     }
@@ -74,8 +96,10 @@ exports.protect = async (req, res, next) => {
         req.headers.authorization.startsWith('Bearer')
     ) {
         token = req.headers.authorization.split(' ')[1];
+    }else if(req.cookies.jwt){
+        token = req.cookies.jwt;
     }
-    console.log(token)
+    
     if (!token) {
         return next(new AppError('you are not logged in, please login to get access'));
     }

@@ -1,22 +1,35 @@
 const express = require('express');
+const path = require('path');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
+const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const expenseRouter = require('./routers/expenseRouter');
 const userRouter = require('./routers/userRouter');
 const budgetRouter = require('./routers/budgetRouter');
 const categoryRouter = require('./routers/categoryRouter');
+const viewRouter = require('./routers/viewRouter')
 
 const app = express();
 
+app.set('view engine', 'pug');
+app.set('views',path.join(__dirname,'views'));
+
+app.use(express.static(path.join(__dirname,'public')));
 //body parser middleware
 app.use(bodyParser.urlencoded({
   extended: false
 }))
+app.use(cookieParser());
 
+
+app.use((req,res,next)=>{
+  next();
+})
 // parse application/json
 app.use(bodyParser.json())
 
+// dotenv
 dotenv.config({
   path: './config.env',
 });
@@ -39,8 +52,9 @@ mongoose
 //port
 const port = process.env.PORT || 3000;
 
-// dotenv
+//routes
 
+app.use('/',viewRouter)
 app.use('/expense/api', expenseRouter);
 app.use('/expense/api/users', userRouter);
 app.use('/expense/api/budget',budgetRouter);

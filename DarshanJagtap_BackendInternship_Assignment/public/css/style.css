@@ -1,0 +1,65 @@
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin: 0 0 100px;
+    /* bottom = footer height */
+    padding: 25px;
+}
+
+#sidebar{
+    margin-top: 40px;
+}
+#main-area{
+    margin-top: 40px;
+}
+.pie {
+    margin: 20px;
+  }
+  
+  svg {
+      float: left;
+  }
+  
+  .legend {
+    float: left;
+    font-family: "Verdana";
+    font-size: .7em;
+  }
+  
+  .pie text {
+    font-family: "Verdana";
+    fill: #000;
+  }
+  
+  .pie .name-text{
+    font-size: .8em;
+  }
+  
+  .pie .value-text{
+    font-size: 3em;
+  }
+  .footer {
+    background-color: orange;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 100px;
+    width: 100%;
+    overflow: hidden;
+}
+
+  .form-container{
+  font-size: 16px;
+  position: absolute;
+  top: 10vh;
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px #000;
+  }
+  .form-container input{
+  height: 35px;;
+  }

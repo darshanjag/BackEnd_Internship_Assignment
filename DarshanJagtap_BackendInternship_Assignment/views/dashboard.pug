@@ -1,0 +1,66 @@
+extends base
+
+block content
+    .container-fluid
+        .row
+            #sidebar.col-md-3
+                .list-group
+                    a.list-group-item.list-group-item-action.active(href='index.html')
+                        | Home
+                    a.list-group-item.list-group-item-action(href='#') Settings
+                    a.list-group-item.list-group-item-action(href='#') Profile
+            #main-area.col-md-9
+                .row.justify-content-around
+                    .card.col-md-5(id='')
+                        .card-header
+                            | Budget Overview
+                        .card-body
+                            #overview
+                    .card.col-md-5
+                        #category-chart.card-header
+                            | Category division
+                        .card-body
+                            #categories
+                table.table
+                    thead
+                        tr
+                            th(scope='col') category
+                            th(scope='col') Item Name
+                            th(scope='col') Amount
+                            th(scope='col') Expense Date
+                            th(scope='col')
+                                 button.btn.btn-primary(type='button' data-toggle='modal' data-target='#exampleModal') Add Expense
+                    tbody
+                        each expense in expenses
+                            tr
+                                td= `${expense.category}`
+                                td= `${expense.name}`
+                                td= `${expense.amount}`
+                                td= `${expense.date}`
+                                td 
+                                    button#expense-delete.btn.btn-danger(type='button' onclick="SomeDeleteRowFunction(this)"  value=`${expense.id}`) Delete
+
+    #exampleModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true')
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    h5#addexpense.modal-title Add Expense
+                    button.close(type='button' data-dismiss='modal' aria-label='Close')
+                        span(aria-hidden='true') &times;
+                .modal-body
+                    form#addcategoryform
+                        .form-group
+                            label(for='expense-name') Name
+                            input#expense-name.form-control(type='email' aria-describedby='emailHelp' placeholder='Expense Name')
+                            .form-group
+                            label(for='expense-amount') amount
+                            input#expense-amount.form-control(type='text' placeholder='Expense Amount')
+                            .form-group
+                            label(for='expense-category') Select Category
+                            select#expense-category.form-control
+                                option(value='') select
+                                option(value='grocery') grocery
+                                option(value='electronics') electronics
+                            button#expense-submit.btn.btn-primary(type='submit') Submit
+
+              
