@@ -11,6 +11,7 @@ const login= async(email,password)=>{
    })
 
    console.log(res);
+   setTimeout(function(){ location.href = "/dashboard"; }, 1000);
 }catch(err){
     console.log(err.response.data);
 }

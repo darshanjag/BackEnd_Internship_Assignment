@@ -1,22 +1,53 @@
+let labels;
+let data;
 
-// eslint-disable-next-line no-new
-new Chart(document.getElementById("pie-chart"), {
+const getData = async()=>{
+  try{
+    const res = await axios({
+       method: 'GET',
+       url: `http://localhost:3000/expense/api/`
+    })
+
+  return res;
+   
+}catch(err){
+    console.log(err);
+}
+
+}
+
+const setData =async()=>{
+  const userdata = await getData();
+  allexpenses = userdata.data.data.expenses.filter(c=> c.active === true);
+  data = allexpenses.map(e=> e.amount); 
+  labels =  allexpenses.map(e=> e.name);
+  console.log(labels.length)
+ 
+  // eslint-disable-next-line no-new
+  new Chart(document.getElementById("pie-chart"), {
     type: 'pie',
     data: {
-      labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+      labels: labels,
       datasets: [{
         label: "Population (millions)",
         backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-        data: [2478,5267,734,784,433]
+        data: data
       }]
     },
     options: {
       title: {
         display: true,
-        text: 'Predicted world population (millions) in 2050'
+        text: 'expense pie-chart'
       }
     }
 });
+ 
+}
+setData();
+
+
+// eslint-disable-next-line no-new
+
 const SomeDeleteRowFunction= async(e)=>{
     try{
         const res = await axios({

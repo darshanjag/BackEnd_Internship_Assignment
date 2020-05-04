@@ -1,6 +1,8 @@
+
 extends base
 
 block content
+    
     .container-fluid
         .row
             #sidebar.col-md-3
@@ -11,17 +13,39 @@ block content
                     a.list-group-item.list-group-item-action(href='#') Profile
             #main-area.col-md-9
                 .row.justify-content-around
-                    .card.col-md-5(id='')
+                    .card.col-md-5
                         .card-header
                             | Budget Overview
-                        .card-body
+                        .card-body#percent-chart
+                            #example.pie-title-center(data-percent=`${per}`) 
+                                span.pie-value= `${per}%`
+                            .text-center
+                                h4= `total expense is ${per}% `
                             #overview
                     .card.col-md-5
                         #category-chart.card-header
-                            | Category division
+                            | Expense Division
                         .card-body
-                            canvas#pie-chart(width='800' height='450')
-                            #categories
+                            if labels<=5
+                                
+                                canvas#pie-chart(width='800' height='450')
+                                #categories
+                            else 
+                                table.table
+                                    thead
+                                        tr
+                                            
+                                            th(scope='col') Item Name
+                                            th(scope='col') amount
+                                        
+                                               
+                                    tbody
+                                        each expense in expenses
+                                            tr#expense-row
+                                                
+                                                td= `${expense.name}`
+                                                td= `${expense.amount}`
+                                            
                 table.table
                     thead
                         tr
@@ -37,7 +61,7 @@ block content
                                 td= `${expense.category}`
                                 td= `${expense.name}`
                                 td= `${expense.amount}`
-                                td= `${expense.date}`
+                                td= `${expense.date.toLocaleString('en-us',{day: 'numeric',month: 'long', year: 'numeric'})}, ${expense.date.toLocaleTimeString('en-US')} `
                                 td 
                                     button#expense-delete.btn.btn-danger(type='button' onclick="SomeDeleteRowFunction(this)"  value=`${expense.id}`) Delete
 

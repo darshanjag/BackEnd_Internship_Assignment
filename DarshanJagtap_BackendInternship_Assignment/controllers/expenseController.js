@@ -9,11 +9,11 @@ exports.addExpense = async (req, res) => {
     });
 };
 exports.getExpenses = async (req, res) => {
-    console.log(req.user)
+
     const expense = await Expense.find();
     res.status(200).json({
         status: 'success',
-        data: expense
+        data: req.user
     })
 
 }
@@ -27,3 +27,4 @@ exports.deleteExpense = async (req, res) => {
         data: null
     })
 }
+
