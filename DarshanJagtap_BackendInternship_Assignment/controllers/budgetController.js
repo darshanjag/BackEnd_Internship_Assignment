@@ -4,10 +4,7 @@ const AppError = require('./../utils/AppError');
 exports.addBudget = async(req,res,next)=>{
     req.body.user = req.user.id;
     const count = await Budget.count()
-console.log(count)
-    if(count===2){
-        return next(new AppError('A user can have only one budget'));
-    }
+  
 
     try{
         const budget = await Budget.create(req.body);
@@ -41,6 +38,7 @@ exports.getBudget = async(req,res,next)=>{
     }
 }
 exports.updateBudget = async(req,res,next)=>{
+   
     try{
         const budget = await Budget.findByIdAndUpdate(req.params.id,req.body,{
             new: true

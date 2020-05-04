@@ -1,26 +1,46 @@
 const Expense = require('./../models/expenseModel');
 exports.dashboard =( async(req,res)=>{
     //getting all the data from collection
+   let budget =0;
+   let amounts ='';
+   let total = '';
+   let labels ='';
+   let l='';
+   let per ='';
+   let path = req.url;
    
     //build template
     const user = req.user;
-    let expenses;
+    let expenses='';
     expenses = user.expenses.filter(c=> c.active === true)
-    let l = expenses.map(e=> e.name);
-    let labels = l.length
-    let budget = user.budget[0].budget;
-    let amounts = expenses.map(e=> e.amount);
-    let total = amounts.reduce(function(a, b) { return a + b; }, 0)
+    l = expenses.map(e=> e.name);
+     labels = l.length
+     if(user.budget[0]){
+      budget = user.budget[0].budget;
+     }
+     
+     amounts = expenses.map(e=> e.amount);
+    total = amounts.reduce(function(a, b) { return a + b; }, 0)
     
-    console.log(req.url)
-    let per =Math.round(100 * total/budget);
+    console.log(total)
+    console.log(budget)
+     per =Math.round((total/budget)*100);
+     
+ console.log(per)
+
+     console.log(per)
+     if(isNaN(per) || !(isFinite(per))){
+       per = 0;
+     }
 
     //render template
     res.status(200).render('dashboard',{
         user,
         expenses,
         labels,
-        per
+        per,
+        budget,
+        path
           });
   })
 
@@ -31,16 +51,41 @@ exports.dashboard =( async(req,res)=>{
 
   exports.settings = (async(req,res)=>{
     try{
-      const user = req.user;
-      const b = req.user.budget
-     const budget=(b[0].budget)
+      let budget =0;
+      let amounts ='';
+      let total = '';
+      let labels ='';
+      let id= '';
+   
+      let l='';
+      let per ='';
+       //build template
+       const user = req.user;
+       if(user.budget[0]===undefined){
+         id= 0 ;
+       }else{
+         id=user.budget[0]._id
+       }
+       let expenses='';
+       expenses = user.expenses.filter(c=> c.active === true)
+       l = expenses.map(e=> e.name);
+        labels = l.length
+      
+        if(user.budget[0]){
+         budget = user.budget[0].budget;
+        }
+       
+        
+        amounts = expenses.map(e=> e.amount);
+       total = amounts.reduce(function(a, b) { return a + b; }, 0)
      const categories = req.user.categories;
 
     
       res.status(200).render('settings',{
         user,
-        b,
-        categories
+        budget,
+        categories,
+        id
       });
 
     }catch(err){

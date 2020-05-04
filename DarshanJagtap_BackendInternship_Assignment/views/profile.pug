@@ -13,8 +13,8 @@ block content
                 form#budget-update-form
                     .form-group
                         label(for='budget-input') 
-                        input#budget-input.form-control(type='text', aria-describedby='emailHelp', value=`${budget}`)
-                    button#budget-update.btn.btn-primary(type='button' value=`${id}` onclick='updateBudgetFunction(this)') Update Budget
+                        input#budget-input.form-control(type='text', aria-describedby='emailHelp', value=``)
+                    button#budget-update.btn.btn-primary(type='button' value=`` onclick='updateBudgetFunction(this)') Update Budget
 
                 form
                     .form-group
@@ -22,16 +22,4 @@ block content
                         input#add-category-input.form-control(type='text', aria-describedby='emailHelp', placeholder='add category')
                     button.btn.btn-primary(type='button' onclick="addCategoryFunction(this)") Add Category  
                 
-
-                h3 categories
-                table.table
-                        
-                    tbody
-                        each category in categories
-                            tr#expense-row
-                            
-                                    td= `${category.name}`
-                                    td 
-                                        button#category-delete-btn.btn.btn-danger(type='button' onclick="deleteCategory(this)"  value=`${category._id}`) Delete
-
-                
+               

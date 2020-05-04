@@ -33,28 +33,21 @@ const createSendToken = (user, statusCode, res) => {
       }
     });
   };
-exports.signup = async (req, res, next) => {
-    //creating the user
-    try {
-        const newUser = await User.create({
-            name: req.body.name,
-            email: req.body.email,
-            password: req.body.password,
-            passwordConfirm: req.body.passwordConfirm,
-        });
-        //logging in the user
-        const token = signToken(newUser._id);
-        res.status(201).json({
-            status: 'succecss',
-            token,
-            data: {
-                user: newUser,
-            },
-        });
-    } catch (err) {
-        console.log(err);
-    }
-};
+  exports.signup = (async (req, res, next) => {
+      try{
+    const newUser = await User.create({
+      name: req.body.name,
+      email: req.body.email,
+      password: req.body.password,
+      passwordConfirm: req.body.passwordConfirm
+    });
+  
+    createSendToken(newUser, 201, res);
+}catch(err){
+    next(new AppError(err.message,200))
+}
+  });
+  
 
 exports.login = async (req, res, next) => {
     try {

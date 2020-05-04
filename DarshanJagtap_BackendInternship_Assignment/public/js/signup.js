@@ -4,7 +4,7 @@ const signupFunction= async(e)=>{
     const password = document.getElementById('sign-up-p').value;
     const cpassword = document.getElementById('sign-up-cp').value;
 
-      console.log(name,email,password,cpassword);
+     
     try{
         const res = await axios({
            method: 'POST',

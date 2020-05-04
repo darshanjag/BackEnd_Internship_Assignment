@@ -12,10 +12,6 @@ const budgetScehama = mongoose.Schema({
     }
 })
 
-budgetScehama.virtual('expenses',{
-    ref: 'Expense',
-    foreignField: 'user',
-    localField: 'user'
-})
+
 const Budget = mongoose.model('Budget',budgetScehama);
 module.exports = Budget;  
