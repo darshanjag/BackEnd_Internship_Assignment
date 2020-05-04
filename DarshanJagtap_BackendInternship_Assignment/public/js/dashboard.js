@@ -21,7 +21,7 @@ const setData =async()=>{
   allexpenses = userdata.data.data.expenses.filter(c=> c.active === true);
   data = allexpenses.map(e=> e.amount); 
   labels =  allexpenses.map(e=> e.name);
-  console.log(labels.length)
+ 
  
   // eslint-disable-next-line no-new
   new Chart(document.getElementById("pie-chart"), {
@@ -91,7 +91,9 @@ $("#expense-submit").click(function(){
         category ===undefined;
     }
     submitExpense(name,amount,category)
-    setTimeout(function(){ location.reload(true); }, 500);
+    setTimeout(function(){ window.location.reload(true); }, 500);
+    setTimeout(function(){ window.location.reload(true); }, 1000);
+
   });
    
 

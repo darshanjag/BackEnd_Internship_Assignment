@@ -22,13 +22,12 @@ exports.dashboard =( async(req,res)=>{
      amounts = expenses.map(e=> e.amount);
     total = amounts.reduce(function(a, b) { return a + b; }, 0)
     
-    console.log(total)
-    console.log(budget)
+  
      per =Math.round((total/budget)*100);
      
- console.log(per)
+ 
 
-     console.log(per)
+      
      if(isNaN(per) || !(isFinite(per))){
        per = 0;
      }
@@ -104,7 +103,7 @@ exports.dashboard =( async(req,res)=>{
 
     const name = user.name;
     const email = user.email
-    console.log(name)
+     
     res.status(200).render('profile',{
       user,
       name,

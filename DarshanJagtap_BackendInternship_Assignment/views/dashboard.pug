@@ -21,17 +21,24 @@ block content
                                 span.pie-value= `${per}%`
                             .text-center
                                 h4= `total expense is ${per}% `
-                                p= `budget is ${budget} `
-
+                                if budget ==0
+                                    p= 'please add budget'
+                                else 
+                                    p=`budget is ${budget} `
                             #overview
                     .card.col-md-5
                         #category-chart.card-header
                             | Expense Division
                         .card-body
-                            if labels<=5
+                            if labels<=5 && labels>0
                                 
                                 canvas#pie-chart(width='800' height='450')
                                 #categories
+
+
+                            else if labels ==0
+                                    p 
+                                        | please add expenses    
                             else 
                                 table.table
                                     thead
