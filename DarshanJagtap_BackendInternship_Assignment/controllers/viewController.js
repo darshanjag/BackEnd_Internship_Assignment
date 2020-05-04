@@ -12,7 +12,7 @@ exports.dashboard =( async(req,res)=>{
     let amounts = expenses.map(e=> e.amount);
     let total = amounts.reduce(function(a, b) { return a + b; }, 0)
     
-
+    console.log(req.url)
     let per =Math.round(100 * total/budget);
 
     //render template
