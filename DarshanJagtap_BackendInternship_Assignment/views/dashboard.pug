@@ -10,7 +10,7 @@ block content
                     a.list-group-item.list-group-item-action.active(href='/dashboard')
                         | Home
                     a.list-group-item.list-group-item-action(href='/settings') Settings
-                    a.list-group-item.list-group-item-action(href='#') Profile
+                    a.list-group-item.list-group-item-action(href='/profile') Profile
             #main-area.col-md-9
                 .row.justify-content-around
                     .card.col-md-5
@@ -90,6 +90,6 @@ block content
                                 option(value='electronics') electronics
                                 each category in user.categories
                                     option(value=`${category.name}`)= `${category.name}`
-                            button#expense-submit.btn.btn-primary(type='submit') Submit
+                            button#expense-submit.btn.btn-primary(type='button' onlcick="submitExpense(this)") Submit
 
               

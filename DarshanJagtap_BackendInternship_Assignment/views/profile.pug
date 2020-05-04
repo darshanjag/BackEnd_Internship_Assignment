@@ -1,25 +1,25 @@
+
 extends base
 
 block content
+    
     .container-fluid
         .row
             #sidebar.col-md-3
                 .list-group
                     a.list-group-item.list-group-item-action(href='/dashboard')
                         | Home
-                    a.list-group-item.list-group-item-action.active(href='/settings') Settings
-                    a.list-group-item.list-group-item-action(href='#') Profile
+                    a.list-group-item.list-group-item-action(href='/settings') Settings
+                    a.list-group-item.list-group-item-action.active(href='/profile') Profile
             #main-area.col-md-9
                 form#budget-update-form
                     .form-group
-                        label(for='budget-input') 
-                        input#budget-input.form-control(type='text', aria-describedby='emailHelp', value=``)
-                    button#budget-update.btn.btn-primary(type='button' value=`` onclick='updateBudgetFunction(this)') Update Budget
+                        label(for='user-name-input') 
+                        input#user-name-input.form-control(type='text', aria-describedby='emailHelp', value=`${name}`)
+                    button#budget-update.btn.btn-primary(type='button' value=`${user._id}` onclick="updateUserNmaeFunction(this)" ) Update Name
 
                 form
                     .form-group
-                        label(for='add-category-input') 
-                        input#add-category-input.form-control(type='text', aria-describedby='emailHelp', placeholder='add category')
-                    button.btn.btn-primary(type='button' onclick="addCategoryFunction(this)") Add Category  
-                
-               
+                        label(for='user-email-input') 
+                        input#user-email-input.form-control(type='text', value=`${email}` aria-describedby='emailHelp', placeholder='add category')
+                    button.btn.btn-primary(type='button' value=`${user._id}` onclick="updateUserEmailFunction(this)"  ) Update Email  

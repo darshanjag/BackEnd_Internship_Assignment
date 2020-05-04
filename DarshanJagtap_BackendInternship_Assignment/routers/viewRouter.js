@@ -12,4 +12,6 @@ router.route('/login').get(viewController.login);
 
 router.route('/settings').get(authController.protect,viewController.settings);
 
+router.route('/profile').get(authController.protect, viewController.profile)
+
 module.exports = router;

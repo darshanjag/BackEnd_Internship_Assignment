@@ -97,3 +97,18 @@ exports.dashboard =( async(req,res)=>{
   exports.signup = ((req,res)=>{
       res.status(200).render('signup')
   })
+
+  exports.profile =(req,res)=>{
+
+    const user = req.user;
+
+    const name = user.name;
+    const email = user.email
+    console.log(name)
+    res.status(200).render('profile',{
+      user,
+      name,
+      email
+
+    })
+  }

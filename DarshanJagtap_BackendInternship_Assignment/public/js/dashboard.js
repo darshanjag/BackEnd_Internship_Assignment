@@ -75,7 +75,7 @@ const submitExpense= async(name,amount,category)=>{
        }
       
    })
-
+   
    console.log(res);
 }catch(err){
     console.log(err.response.data);
@@ -91,7 +91,7 @@ $("#expense-submit").click(function(){
         category ===undefined;
     }
     submitExpense(name,amount,category)
-    setTimeout(function(){ location.reload(true); }, 1000);
+    setTimeout(function(){ location.reload(true); }, 500);
   });
    
 
