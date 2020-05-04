@@ -39,3 +39,7 @@ exports.dashboard =( async(req,res)=>{
     }
 
   })
+
+  exports.signup = ((req,res)=>{
+      res.status(200).render('signup')
+  })
